@@ -1,401 +1,1959 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>KCCI | Kabrestan Cricket Control Institute</title>
 
 <style>
+
 /* =========================
-    GLOBAL STYLES
+   GLOBAL
 ========================= */
+
 *{
     margin:0;
     padding:0;
     box-sizing:border-box;
     font-family:Arial, Helvetica, sans-serif;
 }
-html{ scroll-behavior:smooth; }
+
+html{
+    scroll-behavior:smooth;
+}
+
 body{
     background:#071426;
     color:#ffffff;
     overflow-x:hidden;
 }
+
 :root{
     --dark:#071426;
-    --navy:#041126;
+    --dark2:#0b1e36;
+    --dark3:#102b49;
     --pink:#ff3b91;
     --pink2:#ff69ad;
     --white:#ffffff;
+    --light:#f7f8fb;
     --text:#26354a;
-    --border:#dfe4eb;
 }
 
-/* Page Switching Control */
-.page-section {
-    display: none;
-}
-.page-section.active {
-    display: block;
-}
 
 /* =========================
-    HEADER & NAV
+   HEADER
 ========================= */
+
 header{
     position:fixed;
-    top:0; left:0; width:100%; height:76px;
-    display:flex; justify-content:space-between; align-items:center;
+    top:0;
+    left:0;
+    width:100%;
+
+    height:76px;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
     padding:0 7%;
-    background:rgba(7,20,38,.97);
+
+    background:rgba(7,20,38,.94);
+
     backdrop-filter:blur(14px);
+
     border-bottom:1px solid rgba(255,59,145,.35);
+
     z-index:1000;
 }
-.logo{ font-size:30px; font-weight:900; color:#fff; letter-spacing:3px; }
-.logo span{ color:var(--pink); }
-nav{ display:flex; align-items:center; gap:20px; }
+
+.logo{
+    font-size:30px;
+    font-weight:900;
+
+    color:#ffffff;
+
+    letter-spacing:3px;
+}
+
+.logo span{
+    color:var(--pink);
+}
+
+nav{
+    display:flex;
+    align-items:center;
+    gap:25px;
+}
+
 nav a{
-    color:white; text-decoration:none; font-size:12px; font-weight:bold;
-    transition:.3s; cursor:pointer;
-}
-nav a:hover, nav a.active-link{ color:var(--pink); }
+    color:white;
+    text-decoration:none;
 
-/* Buttons & Common Utility */
+    font-size:13px;
+    font-weight:bold;
+
+    transition:.3s;
+}
+
+nav a:hover{
+    color:var(--pink);
+}
+
+
+/* =========================
+   HERO
+========================= */
+
+.hero{
+
+    min-height:100vh;
+
+    position:relative;
+
+    display:flex;
+    align-items:center;
+
+    padding:110px 8% 70px;
+
+    overflow:hidden;
+
+    background:
+
+    linear-gradient(
+        90deg,
+        rgba(3,13,28,.94) 0%,
+        rgba(7,20,38,.78) 45%,
+        rgba(7,20,38,.45) 100%
+    ),
+
+    url("https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?auto=format&fit=crop&w=2400&q=90")
+
+    center/cover;
+}
+
+
+/* graphic circles */
+
+.hero::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:420px;
+    height:420px;
+
+    border:1px solid rgba(255,59,145,.25);
+
+    border-radius:50%;
+
+    right:-120px;
+    top:120px;
+}
+
+.hero::after{
+
+    content:"";
+
+    position:absolute;
+
+    width:260px;
+    height:260px;
+
+    border:2px solid rgba(255,59,145,.18);
+
+    border-radius:50%;
+
+    right:40px;
+    bottom:-100px;
+}
+
+.hero-content{
+    position:relative;
+    z-index:2;
+
+    max-width:900px;
+}
+
+.hero-tag{
+
+    display:inline-block;
+
+    padding:9px 18px;
+
+    border:1px solid rgba(255,59,145,.6);
+
+    border-radius:30px;
+
+    color:var(--pink2);
+
+    font-size:12px;
+
+    font-weight:bold;
+
+    letter-spacing:3px;
+
+    margin-bottom:25px;
+
+    background:rgba(255,59,145,.06);
+}
+
+.hero h1{
+
+    font-size:68px;
+
+    line-height:1.05;
+
+    letter-spacing:2px;
+
+    color:#ffffff;
+
+    text-shadow:
+    0 0 30px rgba(255,59,145,.2);
+}
+
+.hero h1 span{
+    color:var(--pink);
+}
+
+.hero-line{
+
+    width:100px;
+    height:4px;
+
+    background:var(--pink);
+
+    margin:25px 0;
+
+    border-radius:10px;
+
+    box-shadow:
+    0 0 20px rgba(255,59,145,.7);
+}
+
+.hero p{
+
+    max-width:700px;
+
+    color:#dfe5ec;
+
+    font-size:19px;
+
+    line-height:1.8;
+
+    margin-bottom:30px;
+}
+
 .btn{
-    display:inline-block; padding:14px 30px; background:var(--pink);
-    color:white; text-decoration:none; border-radius:30px; font-weight:bold;
-    border:2px solid var(--pink); transition:.3s; cursor:pointer;
-}
-.btn:hover{ background:transparent; color:var(--pink); }
 
-/* Filter Buttons for History */
-.filter-btn {
-    padding: 10px 20px;
-    background: #041126;
-    color: #fff;
-    border: 1px solid var(--pink);
-    border-radius: 20px;
-    cursor: pointer;
-    font-weight: bold;
-    margin: 5px;
-    transition: 0.3s;
+    display:inline-block;
+
+    padding:14px 30px;
+
+    background:var(--pink);
+
+    color:white;
+
+    text-decoration:none;
+
+    border-radius:30px;
+
+    font-weight:bold;
+
+    border:2px solid var(--pink);
+
+    transition:.3s;
+
+    box-shadow:
+    0 10px 30px rgba(255,59,145,.25);
 }
-.filter-btn.active, .filter-btn:hover {
-    background: var(--pink);
-    color: #fff;
+
+.btn:hover{
+
+    background:transparent;
+
+    color:var(--pink);
+
+    transform:translateY(-3px);
 }
+
+.btn-dark{
+
+    margin-left:10px;
+
+    background:transparent;
+
+    border:2px solid rgba(255,255,255,.5);
+}
+
+.btn-dark:hover{
+
+    border-color:var(--pink);
+
+    background:var(--pink);
+
+    color:white;
+}
+
 
 /* =========================
-    HOME PAGE STYLES
+   STATS BAR
 ========================= */
-.hero-home{
-    min-height:100vh; position:relative; display:flex; align-items:center;
-    padding:110px 8% 70px; overflow:hidden;
-    background: linear-gradient(90deg, rgba(3,13,28,.94) 0%, rgba(7,20,38,.78) 45%, rgba(7,20,38,.45) 100%),
-    url("https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?auto=format&fit=crop&w=2400&q=90") center/cover;
+
+.stats{
+
+    position:relative;
+
+    margin-top:-1px;
+
+    background:#071426;
+
+    border-top:1px solid rgba(255,59,145,.2);
+
+    border-bottom:1px solid rgba(255,59,145,.2);
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(4,1fr);
+
+    text-align:center;
 }
-.hero-content{ position:relative; z-index:2; max-width:900px; }
-.hero-tag{ display:inline-block; padding:9px 18px; border:1px solid rgba(255,59,145,.6); border-radius:30px; color:var(--pink2); font-size:12px; font-weight:bold; letter-spacing:3px; margin-bottom:25px; }
-.hero-home h1{ font-size:60px; line-height:1.05; letter-spacing:2px; }
-.hero-home h1 span{ color:var(--pink); }
-.hero-line{ width:100px; height:4px; background:var(--pink); margin:25px 0; border-radius:10px; }
-.hero-home p{ max-width:700px; color:#dfe5ec; font-size:18px; line-height:1.8; margin-bottom:30px; }
 
-/* Stats Bar */
-.stats{ display:grid; grid-template-columns:repeat(4,1fr); text-align:center; background:#071426; border-y:1px solid rgba(255,59,145,.2); }
-.stat{ padding:28px 15px; border-right:1px solid rgba(255,255,255,.08); }
-.stat h3{ font-size:32px; color:var(--pink); }
-.stat p{ margin-top:7px; color:#aeb9c8; font-size:12px; text-transform:uppercase; }
+.stat{
 
-/* Content Section */
-.content-section{ padding:80px 8%; background:#fff; color:var(--text); }
-.content-section.dark{ background:#071426; color:#fff; }
-.section-title{ text-align:center; font-size:38px; margin-bottom:18px; }
-.format-grid{ max-width:1100px; margin:40px auto 0; display:grid; grid-template-columns:repeat(3,1fr); gap:25px; }
-.format-card{ padding:35px 25px; border-radius:20px; background:#fff; border:1px solid #e4e7ec; box-shadow:0 12px 35px rgba(7,20,38,.08); }
-.format-card h3{ color:#071426; font-size:22px; margin-bottom:10px; }
-.format-card p{ color:#667386; line-height:1.7; font-size:14px; }
+    padding:28px 15px;
+
+    border-right:1px solid rgba(255,255,255,.08);
+}
+
+.stat:last-child{
+    border-right:none;
+}
+
+.stat h3{
+
+    font-size:32px;
+
+    color:var(--pink);
+}
+
+.stat p{
+
+    margin-top:7px;
+
+    color:#aeb9c8;
+
+    font-size:12px;
+
+    letter-spacing:1px;
+
+    text-transform:uppercase;
+}
+
 
 /* =========================
-    MATCHES PAGE STYLES
+   GENERAL SECTIONS
 ========================= */
-.match-panel{ background:#fff; color:#071426; border-radius:8px; overflow:hidden; margin-top:30px; }
-.teams{ padding:50px 45px; display:grid; grid-template-columns:1fr 170px 1fr; align-items:center; text-align:center; }
-.team-symbol{ width:100px; height:100px; margin:auto; display:flex; align-items:center; justify-content:center; border-radius:50%; background:#071426; color:#fff; font-size:24px; font-weight:900; }
-.team-symbol.ban{ background:#087c43; }
-.vs{ width:70px; height:70px; margin:auto; display:flex; align-items:center; justify-content:center; background:var(--pink); color:white; border-radius:50%; font-size:18px; font-weight:900; }
-.scorecard-area{ padding:25px; text-align:center; background:#fafbfc; }
+
+section.content-section{
+
+    position:relative;
+
+    padding:85px 8%;
+
+    background:#ffffff;
+
+    color:var(--text);
+}
+
+section.content-section.dark{
+
+    background:#071426;
+
+    color:white;
+}
+
+.section-label{
+
+    text-align:center;
+
+    color:var(--pink);
+
+    font-size:12px;
+
+    font-weight:bold;
+
+    letter-spacing:4px;
+
+    margin-bottom:12px;
+}
+
+.section-title{
+
+    text-align:center;
+
+    font-size:42px;
+
+    color:#071426;
+
+    margin-bottom:18px;
+}
+
+.dark .section-title{
+    color:white;
+}
+
+.section-title::after{
+
+    content:"";
+
+    display:block;
+
+    width:75px;
+    height:4px;
+
+    background:var(--pink);
+
+    border-radius:10px;
+
+    margin:18px auto 0;
+}
+
+.section-subtitle{
+
+    max-width:800px;
+
+    margin:0 auto 45px;
+
+    text-align:center;
+
+    color:#657386;
+
+    line-height:1.8;
+}
+
+.dark .section-subtitle{
+    color:#b8c3d0;
+}
+
 
 /* =========================
-    SCORECARD PAGE STYLES
+   HISTORY INTRO
 ========================= */
-.result-banner{ background:linear-gradient(135deg,#f32983,#9d1451); padding:20px; text-align:center; border-radius:8px; margin-bottom:30px; }
-.table-box{ width:100%; overflow-x:auto; background:white; margin-bottom:30px; }
-table{ width:100%; border-collapse:collapse; color:#041126; }
-th{ padding:15px; text-align:left; font-size:11px; background:#041126; color:white; }
-td{ padding:14px 15px; border-bottom:1px solid var(--border); font-size:13px; }
-.total-row{ background:#041126; color:white; font-weight:900; }
 
-.history-block { display: none; }
-.history-block.active { display: block; }
+.history-intro{
 
-/* Mobile Adjustments */
+    max-width:1050px;
+
+    margin:auto;
+
+    display:grid;
+
+    grid-template-columns:
+    1.4fr .8fr;
+
+    gap:35px;
+
+    align-items:stretch;
+}
+
+.history-text{
+
+    padding:35px;
+
+    border-radius:20px;
+
+    background:#ffffff;
+
+    border:1px solid #e5e8ed;
+
+    box-shadow:
+    0 15px 40px rgba(7,20,38,.08);
+
+    line-height:1.9;
+
+    color:#344257;
+}
+
+.history-text strong{
+    color:#071426;
+}
+
+.highlight{
+
+    color:var(--pink);
+
+    font-weight:bold;
+}
+
+.history-card{
+
+    padding:35px;
+
+    border-radius:20px;
+
+    background:
+    linear-gradient(
+        145deg,
+        #071426,
+        #102b49
+    );
+
+    border:1px solid rgba(255,59,145,.35);
+
+    box-shadow:
+    0 15px 40px rgba(7,20,38,.2);
+
+    position:relative;
+
+    overflow:hidden;
+}
+
+.history-card::after{
+
+    content:"KCCI";
+
+    position:absolute;
+
+    right:-20px;
+    bottom:-35px;
+
+    font-size:100px;
+
+    font-weight:900;
+
+    color:rgba(255,59,145,.07);
+}
+
+.history-card h3{
+
+    color:var(--pink);
+
+    font-size:25px;
+
+    margin-bottom:18px;
+}
+
+.history-card p{
+
+    color:#d8e0ea;
+
+    line-height:1.8;
+
+    position:relative;
+
+    z-index:2;
+}
+
+
+/* =========================
+   FORMAT CARDS
+========================= */
+
+.format-grid{
+
+    max-width:1100px;
+
+    margin:50px auto 0;
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(3,1fr);
+
+    gap:25px;
+}
+
+.format-card{
+
+    position:relative;
+
+    padding:35px 25px;
+
+    border-radius:20px;
+
+    background:#ffffff;
+
+    border:1px solid #e4e7ec;
+
+    box-shadow:
+    0 12px 35px rgba(7,20,38,.08);
+
+    overflow:hidden;
+
+    transition:.3s;
+}
+
+.format-card:hover{
+
+    transform:translateY(-7px);
+
+    border-color:var(--pink);
+
+    box-shadow:
+    0 18px 40px rgba(255,59,145,.15);
+}
+
+.format-number{
+
+    position:absolute;
+
+    top:15px;
+    right:20px;
+
+    font-size:55px;
+
+    font-weight:900;
+
+    color:rgba(7,20,38,.05);
+}
+
+.format-icon{
+
+    width:55px;
+    height:55px;
+
+    display:flex;
+
+    justify-content:center;
+    align-items:center;
+
+    border-radius:15px;
+
+    background:#071426;
+
+    color:var(--pink);
+
+    font-size:20px;
+
+    margin-bottom:20px;
+}
+
+.format-card h3{
+
+    color:#071426;
+
+    font-size:22px;
+
+    margin-bottom:10px;
+}
+
+.format-card p{
+
+    color:#667386;
+
+    line-height:1.7;
+
+    font-size:14px;
+}
+
+
+/* =========================
+   MILESTONES
+========================= */
+
+.milestones{
+
+    max-width:1100px;
+
+    margin:auto;
+
+    position:relative;
+}
+
+.timeline-line{
+
+    position:absolute;
+
+    left:50%;
+
+    top:0;
+    bottom:0;
+
+    width:2px;
+
+    background:
+    linear-gradient(
+        #ff3b91,
+        rgba(255,59,145,.1)
+    );
+}
+
+.timeline-item{
+
+    width:50%;
+
+    padding:20px 45px;
+
+    position:relative;
+}
+
+.timeline-item:nth-child(even){
+
+    margin-left:50%;
+}
+
+.timeline-dot{
+
+    position:absolute;
+
+    width:15px;
+    height:15px;
+
+    background:var(--pink);
+
+    border-radius:50%;
+
+    top:28px;
+
+    box-shadow:
+    0 0 0 6px rgba(255,59,145,.12);
+}
+
+.timeline-item:nth-child(odd)
+.timeline-dot{
+
+    right:-7px;
+}
+
+.timeline-item:nth-child(even)
+.timeline-dot{
+
+    left:-7px;
+}
+
+.timeline-box{
+
+    padding:25px;
+
+    border-radius:18px;
+
+    background:#ffffff;
+
+    border:1px solid #e3e7ec;
+
+    box-shadow:
+    0 10px 30px rgba(7,20,38,.07);
+}
+
+.timeline-box h3{
+
+    color:var(--pink);
+
+    margin-bottom:10px;
+}
+
+.timeline-box p{
+
+    color:#59687a;
+
+    line-height:1.75;
+
+    font-size:14px;
+}
+
+
+/* =========================
+   QUOTE
+========================= */
+
+.quote-section{
+
+    position:relative;
+
+    padding:100px 8%;
+
+    text-align:center;
+
+    background:
+
+    linear-gradient(
+        rgba(7,20,38,.93),
+        rgba(7,20,38,.96)
+    ),
+
+    url("https://images.unsplash.com/photo-1461896836934-ffe607ba8211?auto=format&fit=crop&w=2400&q=90")
+
+    center/cover;
+
+    overflow:hidden;
+}
+
+.quote-section::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:300px;
+    height:300px;
+
+    border:1px solid rgba(255,59,145,.3);
+
+    border-radius:50%;
+
+    left:-130px;
+    top:-100px;
+}
+
+.quote-section h2{
+
+    color:var(--pink);
+
+    letter-spacing:3px;
+
+    font-size:13px;
+}
+
+.quote-section p{
+
+    max-width:900px;
+
+    margin:25px auto 0;
+
+    color:white;
+
+    font-size:30px;
+
+    line-height:1.5;
+
+    font-style:italic;
+
+    font-weight:bold;
+}
+
+
+/* =========================
+   VISION / MISSION
+========================= */
+
+.vm-grid{
+
+    max-width:1100px;
+
+    margin:45px auto 0;
+
+    display:grid;
+
+    grid-template-columns:
+    1fr 1fr;
+
+    gap:25px;
+}
+
+.vm-card{
+
+    padding:38px;
+
+    border-radius:20px;
+
+    background:#ffffff;
+
+    border:1px solid #e3e7ec;
+
+    box-shadow:
+    0 12px 35px rgba(7,20,38,.08);
+
+    position:relative;
+
+    overflow:hidden;
+}
+
+.vm-card::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:7px;
+
+    height:100%;
+
+    left:0;
+    top:0;
+
+    background:var(--pink);
+}
+
+.vm-card h3{
+
+    color:#071426;
+
+    font-size:25px;
+
+    margin-bottom:15px;
+}
+
+.vm-card p{
+
+    color:#59687a;
+
+    line-height:1.8;
+}
+
+
+/* =========================
+   FINAL HISTORY
+========================= */
+
+.final-history{
+
+    max-width:1000px;
+
+    margin:auto;
+
+    text-align:center;
+
+    color:#dbe3ed;
+
+    line-height:1.9;
+
+    font-size:17px;
+}
+
+.final-history .big{
+
+    display:block;
+
+    margin-top:30px;
+
+    color:var(--pink);
+
+    font-size:25px;
+
+    font-weight:bold;
+}
+
+
+/* =========================
+   FOOTER
+========================= */
+
+footer{
+
+    background:#040c18;
+
+    padding:50px 20px;
+
+    text-align:center;
+
+    border-top:3px solid var(--pink);
+}
+
+footer h3{
+
+    color:white;
+
+    font-size:23px;
+
+    margin-bottom:12px;
+}
+
+footer p{
+
+    color:#8f9aaa;
+
+    margin-top:8px;
+
+    font-size:13px;
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
 @media(max-width:800px){
-    nav{ gap:10px; }
-    nav a{ font-size:10px; }
-    .hero-home h1{ font-size:38px; }
-    .teams{ grid-template-columns:1fr; gap:20px; }
-    .stats{ grid-template-columns:repeat(2,1fr); }
-    .format-grid{ grid-template-columns:1fr; }
+
+    header{
+        padding:0 5%;
+    }
+
+    nav{
+        gap:10px;
+    }
+
+    nav a{
+        font-size:10px;
+    }
+
+    .hero{
+
+        min-height:100vh;
+
+        padding:
+        120px 6% 70px;
+    }
+
+    .hero h1{
+        font-size:42px;
+    }
+
+    .hero p{
+        font-size:16px;
+    }
+
+    .stats{
+
+        grid-template-columns:
+        repeat(2,1fr);
+    }
+
+    .stat{
+
+        border-bottom:1px solid rgba(255,255,255,.08);
+    }
+
+    .history-intro{
+
+        grid-template-columns:1fr;
+    }
+
+    .format-grid{
+
+        grid-template-columns:1fr;
+    }
+
+    .timeline-line{
+        left:10px;
+    }
+
+    .timeline-item,
+    .timeline-item:nth-child(even){
+
+        width:100%;
+
+        margin-left:0;
+
+        padding:
+        20px 0 20px 35px;
+    }
+
+    .timeline-item:nth-child(odd)
+    .timeline-dot,
+    .timeline-item:nth-child(even)
+    .timeline-dot{
+
+        left:3px;
+        right:auto;
+    }
+
+    .vm-grid{
+
+        grid-template-columns:1fr;
+    }
+
+    .quote-section p{
+
+        font-size:22px;
+    }
+
 }
+
 </style>
+
 </head>
+
+
 <body>
 
-<!-- HEADER NAVBAR -->
+
+<!-- =========================
+     HEADER
+========================= -->
+
 <header>
-    <div class="logo">K<span>C</span>CI</div>
-    <nav>
-        <a onclick="showPage('home')" id="link-home" class="active-link">HOME</a>
-        <a onclick="showPage('matches')" id="link-matches">MATCHES</a>
-        <a onclick="showPage('scorecard')" id="link-scorecard">SCORECARD</a>
-    </nav>
+
+<div class="logo">
+K<span>C</span>CI
+</div>
+
+<nav>
+
+<a href="icc.html">HOME</a>
+
+<a href="matches.html">MATCHES</a>
+
+<a href="scorecard.html">SCORECARD</a>
+
+<a href="#">MANAGEMENT</a>
+
+<a href="#">TEAMS</a>
+
+<a href="#">CONTACT</a>
+
+</nav>
+
 </header>
 
-<!-- =========================
-     1. HOME PAGE
-========================= -->
-<div id="home" class="page-section active">
-    <section class="hero-home">
-        <div class="hero-content">
-            <div class="hero-tag">OFFICIAL KCCI • CRICKET INSTITUTION</div>
-            <h1>KABRESTAN<br>CRICKET <span>CONTROL</span><br>INSTITUTE</h1>
-            <div class="hero-line"></div>
-            <p>Experience the journey of KCCI — from a local cricket beginning to a structured grassroots cricket platform.</p>
-            <button onclick="showPage('matches')" class="btn">MATCH CENTER</button>
-        </div>
-    </section>
 
-    <div class="stats">
-        <div class="stat"><h3>2019</h3><p>Journey Began</p></div>
-        <div class="stat"><h3>2026</h3><p>Official Establishment</p></div>
-        <div class="stat"><h3>40+</h3><p>Associated Players</p></div>
-        <div class="stat"><h3>3</h3><p>Major Formats</p></div>
-    </div>
-
-    <section class="content-section dark">
-        <h2 class="section-title">THREE MAJOR FORMATS</h2>
-        <div class="format-grid">
-            <div class="format-card"><h3>TEST CRICKET</h3><p>Long-format cricket designed to test patience and endurance.</p></div>
-            <div class="format-card"><h3>ONE DAY CRICKET</h3><p>Regular Sunday ODI matches provide players with a competitive platform.</p></div>
-            <div class="format-card"><h3>T20 CRICKET</h3><p>Fast-paced format focused on aggressive scoring and match awareness.</p></div>
-        </div>
-    </section>
-</div>
 
 <!-- =========================
-     2. MATCHES PAGE
+     HERO
 ========================= -->
-<div id="matches" class="page-section" style="padding-top:100px;">
-    <div style="width:90%; max-width:1100px; margin:auto;">
-        <h2 class="section-title" style="text-align:left;">OFFICIAL MATCH CENTRE</h2>
-        <div class="match-panel">
-            <div class="teams">
-                <div><div class="team-symbol">IND</div><h3>INDIA</h3><p>238/2</p></div>
-                <div><div class="vs">VS</div><p style="margin-top:10px;">MATCH RESULT</p></div>
-                <div><div class="team-symbol ban">BAN</div><h3>BANGLADESH</h3><p>237 ALL OUT</p></div>
-            </div>
-            <div class="scorecard-area">
-                <button onclick="showPage('scorecard')" class="btn">VIEW FULL SCORECARD</button>
-            </div>
-        </div>
-    </div>
+
+<section class="hero">
+
+<div class="hero-content">
+
+<div class="hero-tag">
+OFFICIAL KCCI • CRICKET INSTITUTION
 </div>
+
+<h1>
+KABRESTAN<br>
+CRICKET <span>CONTROL</span><br>
+INSTITUTE
+</h1>
+
+<div class="hero-line"></div>
+
+<p>
+Experience the journey of KCCI — from a local cricket beginning
+to a structured and professionally managed grassroots cricket platform.
+</p>
+
+<a href="#history" class="btn">
+EXPLORE KCCI
+</a>
+
+<a href="matches.html" class="btn btn-dark">
+MATCH CENTER
+</a>
+
+</div>
+
+</section>
+
+
 
 <!-- =========================
-     3. SCORECARD PAGE
+     STATS
 ========================= -->
-<div id="scorecard" class="page-section" style="padding-top:100px;">
-    <div style="width:90%; max-width:1100px; margin:auto;">
 
-        <!-- MATCH HISTORY FORMAT TABS -->
-        <div style="text-align:center; margin-bottom:20px;">
-            <button class="filter-btn active" onclick="switchFormat('t20', this)">T20 MATCH HISTORY</button>
-            <button class="filter-btn" onclick="switchFormat('odi', this)">ODI MATCH HISTORY</button>
-            <button class="filter-btn" onclick="switchFormat('test', this)">TEST MATCH HISTORY</button>
-        </div>
+<div class="stats">
 
-        <!-- T20 SCORECARD BLOCK -->
-        <div id="t20-block" class="history-block active">
-            <div class="result-banner">
-                <small>T20 MATCH RESULT</small>
-                <h2>INDIA WON BY 8 WICKETS</h2>
-                <p>Bangladesh 237 All Out • India 238/2</p>
-            </div>
+<div class="stat">
 
-            <h3 style="margin-bottom:10px; color:var(--pink);">BANGLADESH BATTING</h3>
-            <div class="table-box">
-                <table>
-                    <thead>
-                        <tr><th>BATSMAN</th><th>RUNS</th><th>BALLS</th><th>SR</th></tr>
-                    </thead>
-                    <tbody>
-                        <tr><td>MOIN.S</td><td>108</td><td>48</td><td>225.00</td></tr>
-                        <tr><td>RAHIL</td><td>7</td><td>6</td><td>116.67</td></tr>
-                        <tr><td>GULAM</td><td>90</td><td>64</td><td>140.63</td></tr>
-                        <tr class="total-row"><td colspan="3">BANGLADESH TOTAL</td><td>237 ALL OUT</td></tr>
-                    </tbody>
-                </table>
-            </div>
+<h3>2019</h3>
 
-            <h3 style="margin-bottom:10px; color:var(--pink);">INDIA BOWLING</h3>
-            <div class="table-box">
-                <table>
-                    <thead>
-                        <tr><th>BOWLER</th><th>OVERS</th><th>RUNS</th><th>WICKETS</th><th>ECON</th></tr>
-                    </thead>
-                    <tbody>
-                        <tr><td>M.SOHEL</td><td>4.0</td><td>28</td><td>4</td><td>7.00</td></tr>
-                        <tr><td>AZHAR BANGI</td><td>4.0</td><td>35</td><td>2</td><td>8.75</td></tr>
-                        <tr><td>ARHAN MURAD</td><td>3.5</td><td>42</td><td>3</td><td>10.95</td></tr>
-                    </tbody>
-                </table>
-            </div>
+<p>Journey Began</p>
 
-            <hr style="border:0; border-top:1px solid rgba(255,255,255,0.1); margin:40px 0;">
-
-            <h3 style="margin-bottom:10px; color:var(--pink);">INDIA BATTING</h3>
-            <div class="table-box">
-                <table>
-                    <thead>
-                        <tr><th>BATSMAN</th><th>RUNS</th><th>BALLS</th><th>SR</th></tr>
-                    </thead>
-                    <tbody>
-                        <tr><td>ARHAN MURAD</td><td>4</td><td>9</td><td>44.44</td></tr>
-                        <tr><td>AZHAR BANGI</td><td>67</td><td>40</td><td>167.50</td></tr>
-                        <tr><td>M.SOHEL</td><td>126</td><td>38</td><td>331.58</td></tr>
-                        <tr class="total-row"><td colspan="3">INDIA TOTAL</td><td>238/2</td></tr>
-                    </tbody>
-                </table>
-            </div>
-
-            <h3 style="margin-bottom:10px; color:var(--pink);">BANGLADESH BOWLING</h3>
-            <div class="table-box">
-                <table>
-                    <thead>
-                        <tr><th>BOWLER</th><th>OVERS</th><th>RUNS</th><th>WICKETS</th><th>ECON</th></tr>
-                    </thead>
-                    <tbody>
-                        <tr><td>MOIN.S</td><td>3.0</td><td>55</td><td>1</td><td>18.33</td></tr>
-                        <tr><td>GULAM</td><td>2.2</td><td>48</td><td>1</td><td>20.57</td></tr>
-                        <tr><td>RAHIL</td><td>2.0</td><td>38</td><td>0</td><td>19.00</td></tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-
-        <!-- ODI SCORECARD BLOCK -->
-        <div id="odi-block" class="history-block">
-            <div class="result-banner">
-                <small>ODI MATCH RESULT</small>
-                <h2>INDIA WON BY 45 RUNS</h2>
-                <p>India 310/6 • Bangladesh 265 All Out</p>
-            </div>
-
-            <h3 style="margin-bottom:10px; color:var(--pink);">INDIA BATTING</h3>
-            <div class="table-box">
-                <table>
-                    <thead>
-                        <tr><th>BATSMAN</th><th>RUNS</th><th>BALLS</th><th>SR</th></tr>
-                    </thead>
-                    <tbody>
-                        <tr><td>M.SOHEL</td><td>112</td><td>95</td><td>117.89</td></tr>
-                        <tr><td>AZHAR BANGI</td><td>84</td><td>78</td><td>107.69</td></tr>
-                        <tr class="total-row"><td colspan="3">INDIA TOTAL</td><td>310/6</td></tr>
-                    </tbody>
-                </table>
-            </div>
-
-            <h3 style="margin-bottom:10px; color:var(--pink);">BANGLADESH BATTING</h3>
-            <div class="table-box">
-                <table>
-                    <thead>
-                        <tr><th>BATSMAN</th><th>RUNS</th><th>BALLS</th><th>SR</th></tr>
-                    </thead>
-                    <tbody>
-                        <tr><td>MOIN.S</td><td>76</td><td>80</td><td>95.00</td></tr>
-                        <tr><td>GULAM</td><td>54</td><td>62</td><td>87.09</td></tr>
-                        <tr class="total-row"><td colspan="3">BANGLADESH TOTAL</td><td>265 ALL OUT</td></tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-
-        <!-- TEST SCORECARD BLOCK -->
-        <div id="test-block" class="history-block">
-            <div class="result-banner">
-                <small>TEST MATCH RESULT</small>
-                <h2>MATCH DRAWN</h2>
-                <p>India 450/8d & 210/4d • Bangladesh 380 & 220/6</p>
-            </div>
-
-            <h3 style="margin-bottom:10px; color:var(--pink);">TEST MATCH SUMMARY</h3>
-            <div class="table-box">
-                <table>
-                    <thead>
-                        <tr><th>INNINGS</th><th>TEAM</th><th>SCORE</th></tr>
-                    </thead>
-                    <tbody>
-                        <tr><td>1st Innings</td><td>India</td><td>450/8d</td></tr>
-                        <tr><td>1st Innings</td><td>Bangladesh</td><td>380 All Out</td></tr>
-                        <tr><td>2nd Innings</td><td>India</td><td>210/4d</td></tr>
-                        <tr><td>2nd Innings</td><td>Bangladesh</td><td>220/6</td></tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-        
-        <div style="text-align:center; margin:30px 0;">
-            <button onclick="showPage('matches')" class="btn">← BACK TO MATCH CENTRE</button>
-        </div>
-    </div>
 </div>
 
-<!-- FOOTER -->
-<footer style="margin-top:80px; padding:30px; text-align:center; background:#020912; border-top:2px solid var(--pink);">
-    <h3>KCCI - Kabrestan Cricket Control Institute</h3>
-    <p>© 2026 KCCI. All Rights Reserved.</p>
+<div class="stat">
+
+<h3>2026</h3>
+
+<p>Official Establishment</p>
+
+</div>
+
+<div class="stat">
+
+<h3>40+</h3>
+
+<p>Associated Players</p>
+
+</div>
+
+<div class="stat">
+
+<h3>3</h3>
+
+<p>Major Formats</p>
+
+</div>
+
+</div>
+
+
+
+<!-- =========================
+     HISTORY INTRO
+========================= -->
+
+<section class="content-section" id="history">
+
+<div class="section-label">
+THE BEGINNING
+</div>
+
+<h2 class="section-title">
+KCCI HISTORY
+</h2>
+
+<p class="section-subtitle">
+From a local cricket initiative to a structured grassroots cricket institution.
+This is the story of KCCI and its continuing journey.
+</p>
+
+
+<div class="history-intro">
+
+
+<div class="history-text">
+
+<p>
+
+<strong>KCCI, also known as Kabristan Cricket Control Institute,</strong>
+is a grassroots cricket institution based in
+<span class="highlight">Kathor, Surat, Gujarat.</span>
+
+KCCI is dedicated to the development, organization,
+and promotion of competitive cricket at the grassroots level.
+
+</p>
+
+<br>
+
+<p>
+
+The journey of KCCI began in
+<span class="highlight">2019</span>
+as a local cricket initiative.
+
+Over the years, the organization developed its playing standards,
+administration, match structure, equipment, and overall cricketing system.
+
+In
+<span class="highlight">2026, KCCI was officially established</span>
+as a structured and professionally managed cricket board.
+
+</p>
+
+</div>
+
+
+<div class="history-card">
+
+<h3>
+KCCI AT A GLANCE
+</h3>
+
+<p>
+
+<strong style="color:white;">
+LOCATION
+</strong><br>
+
+Kathor, Surat, Gujarat
+
+<br><br>
+
+<strong style="color:white;">
+VISION
+</strong><br>
+
+Develop organized grassroots cricket
+and take plastic-ball cricket toward
+the national level.
+
+<br><br>
+
+<strong style="color:white;">
+REGULAR MATCHES
+</strong><br>
+
+ODI matches and other formats are
+regularly played every Sunday.
+
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- =========================
+     FORMATS
+========================= -->
+
+<section class="content-section dark">
+
+<div class="section-label">
+THE KCCI FORMAT
+</div>
+
+<h2 class="section-title">
+THREE MAJOR FORMATS
+</h2>
+
+<p class="section-subtitle">
+KCCI developed a multi-format cricket system consisting of
+Test Cricket, One Day International, T20 Cricket and structured series.
+</p>
+
+
+<div class="format-grid">
+
+
+<div class="format-card">
+
+<div class="format-number">
+01
+</div>
+
+<div class="format-icon">
+TEST
+</div>
+
+<h3>
+TEST CRICKET
+</h3>
+
+<p>
+Long-format cricket designed to test
+patience, technique, endurance and
+overall cricketing ability.
+</p>
+
+</div>
+
+
+<div class="format-card">
+
+<div class="format-number">
+02
+</div>
+
+<div class="format-icon">
+ODI
+</div>
+
+<h3>
+ONE DAY CRICKET
+</h3>
+
+<p>
+Regular Sunday ODI matches provide
+players with a consistent and competitive
+cricketing platform.
+</p>
+
+</div>
+
+
+<div class="format-card">
+
+<div class="format-number">
+03
+</div>
+
+<div class="format-icon">
+T20
+</div>
+
+<h3>
+T20 CRICKET
+</h3>
+
+<p>
+A shorter and more aggressive format
+focused on fast scoring, bowling,
+fielding and match awareness.
+</p>
+
+</div>
+
+
+</div>
+
+</section>
+
+
+
+<!-- =========================
+     PLAYER DEVELOPMENT
+========================= -->
+
+<section class="content-section">
+
+<div class="section-label">
+PLAYER DEVELOPMENT
+</div>
+
+<h2 class="section-title">
+BUILDING CRICKETERS
+</h2>
+
+<p class="section-subtitle">
+KCCI currently has around 40 players associated with the organization,
+with approximately 12 to 18 players actively participating on a regular basis.
+</p>
+
+
+<div class="history-intro">
+
+
+<div class="history-card">
+
+<h3>
+40+ PLAYERS
+</h3>
+
+<p>
+
+KCCI has created a platform where players
+can develop their batting, bowling,
+wicketkeeping, fielding and leadership skills.
+
+</p>
+
+</div>
+
+
+<div class="history-text">
+
+<p>
+
+The organization focuses on developing players
+across multiple areas of the game.
+
+From batting and bowling to wicketkeeping,
+fielding and leadership, KCCI aims to provide
+players with opportunities to improve through
+regular competitive cricket.
+
+</p>
+
+<br>
+
+<p>
+
+The goal is not only to play matches,
+but to create a serious environment where
+players can develop their abilities and
+take cricket to the next level.
+
+</p>
+
+</div>
+
+
+</div>
+
+</section>
+
+
+
+<!-- =========================
+     TIMELINE
+========================= -->
+
+<section class="content-section dark">
+
+<div class="section-label">
+THE JOURNEY
+</div>
+
+<h2 class="section-title">
+IMPORTANT MILESTONES
+</h2>
+
+<p class="section-subtitle">
+Key moments that shaped the development of KCCI.
+</p>
+
+
+<div class="milestones">
+
+<div class="timeline-line"></div>
+
+
+<div class="timeline-item">
+
+<div class="timeline-dot"></div>
+
+<div class="timeline-box">
+
+<h3>
+2019 • THE BEGINNING
+</h3>
+
+<p>
+
+The journey of KCCI began as a local
+cricket initiative in Kathor.
+
+</p>
+
+</div>
+
+</div>
+
+
+<div class="timeline-item">
+
+<div class="timeline-dot"></div>
+
+<div class="timeline-box">
+
+<h3>
+PLASTIC STUMPS
+</h3>
+
+<p>
+
+Plastic stumps were introduced,
+replacing the old wooden or plywood
+setup used during the early days.
+
+</p>
+
+</div>
+
+</div>
+
+
+<div class="timeline-item">
+
+<div class="timeline-dot"></div>
+
+<div class="timeline-box">
+
+<h3>
+PROPER TROPHIES
+</h3>
+
+<p>
+
+Proper fibre trophies were introduced,
+bringing a more organized competitive
+experience to KCCI.
+
+</p>
+
+</div>
+
+</div>
+
+
+<div class="timeline-item">
+
+<div class="timeline-dot"></div>
+
+<div class="timeline-box">
+
+<h3>
+FORMAT REVOLUTION
+</h3>
+
+<p>
+
+Test, ODI and T20 formats were introduced,
+along with structured series between teams.
+
+</p>
+
+</div>
+
+</div>
+
+
+<div class="timeline-item">
+
+<div class="timeline-dot"></div>
+
+<div class="timeline-box">
+
+<h3>
+EQUIPMENT DEVELOPMENT
+</h3>
+
+<p>
+
+Proper packets of cricket balls, bats and
+better cricket equipment became part of
+the developing system.
+
+</p>
+
+</div>
+
+</div>
+
+
+<div class="timeline-item">
+
+<div class="timeline-dot"></div>
+
+<div class="timeline-box">
+
+<h3>
+2026 • OFFICIAL ESTABLISHMENT
+</h3>
+
+<p>
+
+KCCI was officially established as a
+structured and professionally managed
+cricket board.
+
+</p>
+
+</div>
+
+</div>
+
+
+</div>
+
+</section>
+
+
+
+<!-- =========================
+     HISTORY CHAPTER
+========================= -->
+
+<section class="content-section">
+
+<div class="section-label">
+THE STORY BEHIND THE GAME
+</div>
+
+<h2 class="section-title">
+FROM LOCAL TO ORGANIZED CRICKET
+</h2>
+
+
+<div class="history-text" style="max-width:1100px;margin:auto;">
+
+<p>
+
+In the early days, KCCI basically had only one format of cricket.
+It was an unlimited-over format, mostly played with fast or aggressive bowling.
+
+There was no proper division of formats and there were many unusual
+rules and regulations.
+
+</p>
+
+<br>
+
+<p>
+
+The systems were gradually changed and
+<span class="highlight">
+proper cricket formats were introduced.
+</span>
+
+KCCI brought three major formats:
+
+<strong>
+Test, ODI and T20.
+</strong>
+
+The concept of series and structured matches between teams
+was also introduced.
+
+</p>
+
+<br>
+
+<p>
+
+The development continued with better equipment,
+proper cricket balls, bats, rules and team structures.
+
+Tournaments were eventually introduced as part of the
+developing cricket system.
+
+</p>
+
+</div>
+
+</section>
+
+
+
+<!-- =========================
+     QUOTE
+========================= -->
+
+<section class="quote-section">
+
+<h2>
+KCCI • THE SPIRIT OF CRICKET
+</h2>
+
+<p>
+"Play together. Compete together.
+Grow together."
+</p>
+
+</section>
+
+
+
+<!-- =========================
+     MANAGEMENT
+========================= -->
+
+<section class="content-section">
+
+<div class="section-label">
+PROFESSIONAL STRUCTURE
+</div>
+
+<h2 class="section-title">
+KCCI MANAGEMENT
+</h2>
+
+<p class="section-subtitle">
+KCCI operates through a structured administrative system designed
+to maintain discipline, proper player selection, match organization,
+supervision and professional management.
+</p>
+
+
+<div class="format-grid">
+
+
+<div class="format-card">
+
+<div class="format-icon">
+01
+</div>
+
+<h3>
+CHAIRMAN
+</h3>
+
+<p>
+Leadership, responsibility and overall
+direction of the organization.
+</p>
+
+</div>
+
+
+<div class="format-card">
+
+<div class="format-icon">
+02
+</div>
+
+<h3>
+SELECTION COMMITTEE
+</h3>
+
+<p>
+Player selection, team structure and
+development of competitive squads.
+</p>
+
+</div>
+
+
+<div class="format-card">
+
+<div class="format-icon">
+03
+</div>
+
+<h3>
+MANAGEMENT
+</h3>
+
+<p>
+Match organization, supervision,
+discipline and administration.
+</p>
+
+</div>
+
+
+</div>
+
+</section>
+
+
+
+<!-- =========================
+     VISION
+========================= -->
+
+<section class="content-section dark">
+
+<div class="section-label">
+THE FUTURE
+</div>
+
+<h2 class="section-title">
+VISION & MISSION
+</h2>
+
+
+<div class="vm-grid">
+
+
+<div class="vm-card">
+
+<h3>
+KCCI'S VISION
+</h3>
+
+<p>
+
+To develop KCCI into a leading grassroots
+cricket institution, provide players with a
+professional and competitive environment,
+establish high standards of cricket administration,
+and take organized plastic-ball cricket from the
+local level to the national stage.
+
+</p>
+
+</div>
+
+
+<div class="vm-card">
+
+<h3>
+KCCI'S MISSION
+</h3>
+
+<p>
+
+To organize structured cricket, develop local talent,
+maintain professional standards, promote discipline
+and fair competition, and create a sustainable
+cricketing platform where players can develop
+their abilities.
+
+</p>
+
+</div>
+
+
+</div>
+
+</section>
+
+
+
+<!-- =========================
+     NATIONAL VISION
+========================= -->
+
+<section class="content-section">
+
+<div class="section-label">
+THE BIGGER DREAM
+</div>
+
+<h2 class="section-title">
+FROM KATHOR TO THE NATIONAL STAGE
+</h2>
+
+<div class="final-history">
+
+<p>
+
+One of KCCI's major visions is to take
+<strong>plastic-ball cricket from the grassroots level
+to the national level.</strong>
+
+</p>
+
+<br>
+
+<p>
+
+KCCI aims to develop standardized formats,
+rules, player selection systems, competitions
+and professional administration for plastic-ball
+cricket, with the long-term goal of expanding
+its recognition across India.
+
+</p>
+
+<span class="big">
+KCCI – From a Local Beginning to a National Cricketing Vision.
+</span>
+
+</div>
+
+</section>
+
+
+
+<!-- =========================
+     FINAL MESSAGE
+========================= -->
+
+<section class="content-section dark">
+
+<div class="final-history">
+
+<div class="section-label">
+THE JOURNEY CONTINUES
+</div>
+
+<h2 class="section-title">
+THE HISTORY OF KCCI
+</h2>
+
+<p>
+
+From its beginning in 2019 to its official
+establishment in 2026, KCCI represents a journey
+of development, innovation, discipline,
+competitive cricket and professional organization.
+
+</p>
+
+<br>
+
+<p>
+
+Today, KCCI continues to work toward building
+a strong and recognized cricket institution in
+Kathor, Surat, Gujarat, while creating opportunities
+for local players and developing a larger vision
+for the future of plastic-ball cricket.
+
+</p>
+
+<span class="big">
+"Cricket is the game. KCCI is the journey."
+</span>
+
+</div>
+
+</section>
+
+
+
+<!-- =========================
+     FOOTER
+========================= -->
+
+<footer>
+
+<h3>
+KCCI - Kabrestan Cricket Control Institute
+</h3>
+
+<p>
+From a Local Beginning to a National Cricketing Vision.
+</p>
+
+<p>
+© 2026 KCCI. All Rights Reserved.
+</p>
+
 </footer>
 
-<!-- SCRIPT TO SWITCH PAGES SMOOTHLY -->
-<script>
-function showPage(pageId) {
-    let pages = document.querySelectorAll('.page-section');
-    pages.forEach(page => page.classList.remove('active'));
-
-    document.getElementById(pageId).classList.add('active');
-
-    let navLinks = document.querySelectorAll('nav a');
-    navLinks.forEach(link => link.classList.remove('active-link'));
-    
-    let activeNav = document.getElementById('link-' + pageId);
-    if(activeNav) activeNav.classList.add('active-link');
-
-    window.scrollTo({top: 0, behavior: 'smooth'});
-}
-
-function switchFormat(formatId, btn) {
-    let blocks = document.querySelectorAll('.history-block');
-    blocks.forEach(block => block.classList.remove('active'));
-
-    document.getElementById(formatId + '-block').classList.add('active');
-
-    let buttons = document.querySelectorAll('.filter-btn');
-    buttons.forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-}
-</script>
 
 </body>
 </html>
