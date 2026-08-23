@@ -7,7 +7,7 @@
 
 <style>
 /* =========================
-   GLOBAL STYLES
+    GLOBAL STYLES
 ========================= */
 *{
     margin:0;
@@ -40,7 +40,7 @@ body{
 }
 
 /* =========================
-   HEADER & NAV
+    HEADER & NAV
 ========================= */
 header{
     position:fixed;
@@ -69,8 +69,25 @@ nav a:hover, nav a.active-link{ color:var(--pink); }
 }
 .btn:hover{ background:transparent; color:var(--pink); }
 
+/* Filter Buttons for History */
+.filter-btn {
+    padding: 10px 20px;
+    background: #041126;
+    color: #fff;
+    border: 1px solid var(--pink);
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: bold;
+    margin: 5px;
+    transition: 0.3s;
+}
+.filter-btn.active, .filter-btn:hover {
+    background: var(--pink);
+    color: #fff;
+}
+
 /* =========================
-   HOME PAGE STYLES
+    HOME PAGE STYLES
 ========================= */
 .hero-home{
     min-height:100vh; position:relative; display:flex; align-items:center;
@@ -101,7 +118,7 @@ nav a:hover, nav a.active-link{ color:var(--pink); }
 .format-card p{ color:#667386; line-height:1.7; font-size:14px; }
 
 /* =========================
-   MATCHES PAGE STYLES
+    MATCHES PAGE STYLES
 ========================= */
 .match-panel{ background:#fff; color:#071426; border-radius:8px; overflow:hidden; margin-top:30px; }
 .teams{ padding:50px 45px; display:grid; grid-template-columns:1fr 170px 1fr; align-items:center; text-align:center; }
@@ -111,7 +128,7 @@ nav a:hover, nav a.active-link{ color:var(--pink); }
 .scorecard-area{ padding:25px; text-align:center; background:#fafbfc; }
 
 /* =========================
-   SCORECARD PAGE STYLES
+    SCORECARD PAGE STYLES
 ========================= */
 .result-banner{ background:linear-gradient(135deg,#f32983,#9d1451); padding:20px; text-align:center; border-radius:8px; margin-bottom:30px; }
 .table-box{ width:100%; overflow-x:auto; background:white; margin-bottom:30px; }
@@ -119,6 +136,9 @@ table{ width:100%; border-collapse:collapse; color:#041126; }
 th{ padding:15px; text-align:left; font-size:11px; background:#041126; color:white; }
 td{ padding:14px 15px; border-bottom:1px solid var(--border); font-size:13px; }
 .total-row{ background:#041126; color:white; font-weight:900; }
+
+.history-block { display: none; }
+.history-block.active { display: block; }
 
 /* Mobile Adjustments */
 @media(max-width:800px){
@@ -198,74 +218,142 @@ td{ padding:14px 15px; border-bottom:1px solid var(--border); font-size:13px; }
 ========================= -->
 <div id="scorecard" class="page-section" style="padding-top:100px;">
     <div style="width:90%; max-width:1100px; margin:auto;">
-        <div class="result-banner">
-            <small>MATCH RESULT</small>
-            <h2>INDIA WON BY 8 WICKETS</h2>
-            <p>Bangladesh 237 All Out • India 238/2</p>
+
+        <!-- MATCH HISTORY FORMAT TABS -->
+        <div style="text-align:center; margin-bottom:20px;">
+            <button class="filter-btn active" onclick="switchFormat('t20', this)">T20 MATCH HISTORY</button>
+            <button class="filter-btn" onclick="switchFormat('odi', this)">ODI MATCH HISTORY</button>
+            <button class="filter-btn" onclick="switchFormat('test', this)">TEST MATCH HISTORY</button>
         </div>
 
-        <!-- BANGLADESH BATTING -->
-        <h3 style="margin-bottom:10px; color:var(--pink);">BANGLADESH BATTING</h3>
-        <div class="table-box">
-            <table>
-                <thead>
-                    <tr><th>BATSMAN</th><th>RUNS</th><th>BALLS</th><th>SR</th></tr>
-                </thead>
-                <tbody>
-                    <tr><td>MOIN.S</td><td>108</td><td>48</td><td>225.00</td></tr>
-                    <tr><td>RAHIL</td><td>7</td><td>6</td><td>116.67</td></tr>
-                    <tr><td>GULAM</td><td>90</td><td>64</td><td>140.63</td></tr>
-                    <tr class="total-row"><td colspan="3">BANGLADESH TOTAL</td><td>237 ALL OUT</td></tr>
-                </tbody>
-            </table>
+        <!-- T20 SCORECARD BLOCK -->
+        <div id="t20-block" class="history-block active">
+            <div class="result-banner">
+                <small>T20 MATCH RESULT</small>
+                <h2>INDIA WON BY 8 WICKETS</h2>
+                <p>Bangladesh 237 All Out • India 238/2</p>
+            </div>
+
+            <h3 style="margin-bottom:10px; color:var(--pink);">BANGLADESH BATTING</h3>
+            <div class="table-box">
+                <table>
+                    <thead>
+                        <tr><th>BATSMAN</th><th>RUNS</th><th>BALLS</th><th>SR</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>MOIN.S</td><td>108</td><td>48</td><td>225.00</td></tr>
+                        <tr><td>RAHIL</td><td>7</td><td>6</td><td>116.67</td></tr>
+                        <tr><td>GULAM</td><td>90</td><td>64</td><td>140.63</td></tr>
+                        <tr class="total-row"><td colspan="3">BANGLADESH TOTAL</td><td>237 ALL OUT</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3 style="margin-bottom:10px; color:var(--pink);">INDIA BOWLING</h3>
+            <div class="table-box">
+                <table>
+                    <thead>
+                        <tr><th>BOWLER</th><th>OVERS</th><th>RUNS</th><th>WICKETS</th><th>ECON</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>M.SOHEL</td><td>4.0</td><td>28</td><td>4</td><td>7.00</td></tr>
+                        <tr><td>AZHAR BANGI</td><td>4.0</td><td>35</td><td>2</td><td>8.75</td></tr>
+                        <tr><td>ARHAN MURAD</td><td>3.5</td><td>42</td><td>3</td><td>10.95</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <hr style="border:0; border-top:1px solid rgba(255,255,255,0.1); margin:40px 0;">
+
+            <h3 style="margin-bottom:10px; color:var(--pink);">INDIA BATTING</h3>
+            <div class="table-box">
+                <table>
+                    <thead>
+                        <tr><th>BATSMAN</th><th>RUNS</th><th>BALLS</th><th>SR</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>ARHAN MURAD</td><td>4</td><td>9</td><td>44.44</td></tr>
+                        <tr><td>AZHAR BANGI</td><td>67</td><td>40</td><td>167.50</td></tr>
+                        <tr><td>M.SOHEL</td><td>126</td><td>38</td><td>331.58</td></tr>
+                        <tr class="total-row"><td colspan="3">INDIA TOTAL</td><td>238/2</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3 style="margin-bottom:10px; color:var(--pink);">BANGLADESH BOWLING</h3>
+            <div class="table-box">
+                <table>
+                    <thead>
+                        <tr><th>BOWLER</th><th>OVERS</th><th>RUNS</th><th>WICKETS</th><th>ECON</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>MOIN.S</td><td>3.0</td><td>55</td><td>1</td><td>18.33</td></tr>
+                        <tr><td>GULAM</td><td>2.2</td><td>48</td><td>1</td><td>20.57</td></tr>
+                        <tr><td>RAHIL</td><td>2.0</td><td>38</td><td>0</td><td>19.00</td></tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
 
-        <!-- INDIA BOWLING -->
-        <h3 style="margin-bottom:10px; color:var(--pink);">INDIA BOWLING</h3>
-        <div class="table-box">
-            <table>
-                <thead>
-                    <tr><th>BOWLER</th><th>OVERS</th><th>RUNS</th><th>WICKETS</th><th>ECON</th></tr>
-                </thead>
-                <tbody>
-                    <tr><td>M.SOHEL</td><td>4.0</td><td>28</td><td>4</td><td>7.00</td></tr>
-                    <tr><td>AZHAR BANGI</td><td>4.0</td><td>35</td><td>2</td><td>8.75</td></tr>
-                    <tr><td>ARHAN MURAD</td><td>3.5</td><td>42</td><td>3</td><td>10.95</td></tr>
-                </tbody>
-            </table>
+        <!-- ODI SCORECARD BLOCK -->
+        <div id="odi-block" class="history-block">
+            <div class="result-banner">
+                <small>ODI MATCH RESULT</small>
+                <h2>INDIA WON BY 45 RUNS</h2>
+                <p>India 310/6 • Bangladesh 265 All Out</p>
+            </div>
+
+            <h3 style="margin-bottom:10px; color:var(--pink);">INDIA BATTING</h3>
+            <div class="table-box">
+                <table>
+                    <thead>
+                        <tr><th>BATSMAN</th><th>RUNS</th><th>BALLS</th><th>SR</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>M.SOHEL</td><td>112</td><td>95</td><td>117.89</td></tr>
+                        <tr><td>AZHAR BANGI</td><td>84</td><td>78</td><td>107.69</td></tr>
+                        <tr class="total-row"><td colspan="3">INDIA TOTAL</td><td>310/6</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3 style="margin-bottom:10px; color:var(--pink);">BANGLADESH BATTING</h3>
+            <div class="table-box">
+                <table>
+                    <thead>
+                        <tr><th>BATSMAN</th><th>RUNS</th><th>BALLS</th><th>SR</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>MOIN.S</td><td>76</td><td>80</td><td>95.00</td></tr>
+                        <tr><td>GULAM</td><td>54</td><td>62</td><td>87.09</td></tr>
+                        <tr class="total-row"><td colspan="3">BANGLADESH TOTAL</td><td>265 ALL OUT</td></tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
 
-        <hr style="border:0; border-top:1px solid rgba(255,255,255,0.1); margin:40px 0;">
+        <!-- TEST SCORECARD BLOCK -->
+        <div id="test-block" class="history-block">
+            <div class="result-banner">
+                <small>TEST MATCH RESULT</small>
+                <h2>MATCH DRAWN</h2>
+                <p>India 450/8d & 210/4d • Bangladesh 380 & 220/6</p>
+            </div>
 
-        <!-- INDIA BATTING -->
-        <h3 style="margin-bottom:10px; color:var(--pink);">INDIA BATTING</h3>
-        <div class="table-box">
-            <table>
-                <thead>
-                    <tr><th>BATSMAN</th><th>RUNS</th><th>BALLS</th><th>SR</th></tr>
-                </thead>
-                <tbody>
-                    <tr><td>ARHAN MURAD</td><td>4</td><td>9</td><td>44.44</td></tr>
-                    <tr><td>AZHAR BANGI</td><td>67</td><td>40</td><td>167.50</td></tr>
-                    <tr><td>M.SOHEL</td><td>126</td><td>38</td><td>331.58</td></tr>
-                    <tr class="total-row"><td colspan="3">INDIA TOTAL</td><td>238/2</td></tr>
-                </tbody>
-            </table>
-        </div>
-
-        <!-- BANGLADESH BOWLING -->
-        <h3 style="margin-bottom:10px; color:var(--pink);">BANGLADESH BOWLING</h3>
-        <div class="table-box">
-            <table>
-                <thead>
-                    <tr><th>BOWLER</th><th>OVERS</th><th>RUNS</th><th>WICKETS</th><th>ECON</th></tr>
-                </thead>
-                <tbody>
-                    <tr><td>MOIN.S</td><td>3.0</td><td>55</td><td>1</td><td>18.33</td></tr>
-                    <tr><td>GULAM</td><td>2.2</td><td>48</td><td>1</td><td>20.57</td></tr>
-                    <tr><td>RAHIL</td><td>2.0</td><td>38</td><td>0</td><td>19.00</td></tr>
-                </tbody>
-            </table>
+            <h3 style="margin-bottom:10px; color:var(--pink);">TEST MATCH SUMMARY</h3>
+            <div class="table-box">
+                <table>
+                    <thead>
+                        <tr><th>INNINGS</th><th>TEAM</th><th>SCORE</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>1st Innings</td><td>India</td><td>450/8d</td></tr>
+                        <tr><td>1st Innings</td><td>Bangladesh</td><td>380 All Out</td></tr>
+                        <tr><td>2nd Innings</td><td>India</td><td>210/4d</td></tr>
+                        <tr><td>2nd Innings</td><td>Bangladesh</td><td>220/6</td></tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
         
         <div style="text-align:center; margin:30px 0;">
@@ -283,22 +371,29 @@ td{ padding:14px 15px; border-bottom:1px solid var(--border); font-size:13px; }
 <!-- SCRIPT TO SWITCH PAGES SMOOTHLY -->
 <script>
 function showPage(pageId) {
-    // Hide all section pages
     let pages = document.querySelectorAll('.page-section');
     pages.forEach(page => page.classList.remove('active'));
 
-    // Show selected page
     document.getElementById(pageId).classList.add('active');
 
-    // Update Nav Active links
     let navLinks = document.querySelectorAll('nav a');
     navLinks.forEach(link => link.classList.remove('active-link'));
     
     let activeNav = document.getElementById('link-' + pageId);
     if(activeNav) activeNav.classList.add('active-link');
 
-    // Scroll to top automatically
     window.scrollTo({top: 0, behavior: 'smooth'});
+}
+
+function switchFormat(formatId, btn) {
+    let blocks = document.querySelectorAll('.history-block');
+    blocks.forEach(block => block.classList.remove('active'));
+
+    document.getElementById(formatId + '-block').classList.add('active');
+
+    let buttons = document.querySelectorAll('.filter-btn');
+    buttons.forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
 }
 </script>
 
