@@ -1,148 +1,43 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="gu">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cricket League Management</title>
+  <title>Kabrestan Cricket Control Institute (KCCI)</title>
   <style>
-    /* Global Styles */
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: #f4f7f6;
-      color: #333;
-      line-height: 1.6;
-    }
-    header {
-      background-color: #1b365d;
-      color: #ffffff;
-      padding: 1.5rem 1rem;
-      text-align: center;
-      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-    }
-    header h1 {
-      margin-bottom: 0.5rem;
-      font-size: 2rem;
-    }
-    
-    /* Navigation Bar */
-    nav {
-      background-color: #0b1d3a;
-      display: flex;
-      justify-content: center;
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-    }
-    nav a {
-      color: #ffffff;
-      padding: 1rem 1.5rem;
-      text-decoration: none;
-      font-weight: bold;
-      transition: background 0.3s;
-      cursor: pointer;
-    }
-    nav a:hover, nav a.active {
-      background-color: #0056b3;
-    }
-
-    /* Container & Section View Control */
-    .container {
-      max-width: 1100px;
-      margin: 2rem auto;
-      padding: 0 1rem;
-    }
-    .page-section {
-      display: none;
-      background: #ffffff;
-      padding: 2rem;
-      border-radius: 8px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-    }
-    .page-section.active-section {
-      display: block;
-    }
-
-    /* Typography & Utility */
-    h2 {
-      color: #1b365d;
-      margin-bottom: 1rem;
-      border-bottom: 2px solid #0056b3;
-      padding-bottom: 0.5rem;
-    }
-    h3 {
-      color: #0056b3;
-      margin: 1.5rem 0 0.5rem 0;
-    }
-    p {
-      margin-bottom: 1rem;
-    }
-
-    /* Cards Layout */
-    .card-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 1.5rem;
-      margin-top: 1.5rem;
-    }
-    .card {
-      border: 1px solid #e0e0e0;
-      border-radius: 6px;
-      padding: 1.2rem;
-      background-color: #fafafa;
-    }
-    .card h4 {
-      color: #1b365d;
-      margin-bottom: 0.5rem;
-    }
-
-    /* Scorecard Tables */
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin: 1rem 0;
-    }
-    table, th, td {
-      border: 1px solid #dddddd;
-    }
-    th, td {
-      padding: 0.75rem;
-      text-align: left;
-    }
-    th {
-      background-color: #1b365d;
-      color: white;
-    }
-    tr:nth-child(even) {
-      background-color: #f9f9f9;
-    }
-
-    /* Footer */
-    footer {
-      background-color: #1b365d;
-      color: #ffffff;
-      text-align: center;
-      padding: 1.5rem;
-      margin-top: 3rem;
-    }
-    footer p {
-      margin: 0.3rem 0;
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #0f172a; color: #f8fafc; line-height: 1.6; }
+    header { background: linear-gradient(135deg, #1e293b, #0f172a); padding: 2rem 1rem; text-align: center; border-bottom: 3px solid #38bdf8; }
+    header h1 { font-size: 2.2rem; color: #38bdf8; margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 1px; }
+    header p { color: #94a3b8; font-size: 1.1rem; }
+    nav { background: #1e293b; display: flex; justify-content: center; position: sticky; top: 0; z-index: 1000; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.3); }
+    nav a { color: #f8fafc; padding: 1rem 1.8rem; text-decoration: none; font-weight: bold; cursor: pointer; transition: all 0.3s ease; border-bottom: 3px solid transparent; }
+    nav a:hover, nav a.active { background: #334155; color: #38bdf8; border-bottom: 3px solid #38bdf8; }
+    .container { max-width: 1100px; margin: 2rem auto; padding: 0 1rem; }
+    .page-section { display: none; background: #1e293b; padding: 2rem; border-radius: 12px; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.3); }
+    .page-section.active-section { display: block; }
+    h2 { color: #38bdf8; margin-bottom: 1.5rem; border-bottom: 2px solid #334155; padding-bottom: 0.5rem; font-size: 1.8rem; }
+    h3 { color: #f1f5f9; margin: 1.5rem 0 1rem 0; }
+    p { margin-bottom: 1rem; color: #cbd5e1; }
+    .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-top: 1.5rem; }
+    .card { background: #334155; border: 1px solid #475569; border-radius: 8px; padding: 1.5rem; transition: transform 0.2s; }
+    .card:hover { transform: translateY(-3px); }
+    .card h4 { color: #38bdf8; margin-bottom: 0.5rem; font-size: 1.2rem; }
+    table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; background: #0f172a; border-radius: 8px; overflow: hidden; }
+    th, td { padding: 0.9rem; text-align: left; border-bottom: 1px solid #334155; }
+    th { background: #38bdf8; color: #0f172a; font-weight: bold; text-transform: uppercase; font-size: 0.85rem; }
+    tr:nth-child(even) { background: #1e293b; }
+    footer { background: #0f172a; color: #64748b; text-align: center; padding: 2rem 1rem; margin-top: 3rem; border-top: 1px solid #1e293b; }
+    footer p { margin: 0.3rem 0; color: #64748b; }
   </style>
 </head>
 <body>
 
-  <!-- Main Header -->
   <header>
-    <h1>Tournament Portal</h1>
-    <p>Official League Matches & Scorecard Updates</p>
+    <h1>Kabrestan Cricket Control Institute</h1>
+    <p>Official KCCI Portal & Tournament Management System</p>
   </header>
 
-  <!-- Navigation Menu -->
   <nav>
     <a id="nav-home" class="active" onclick="showPage('home')">HOME</a>
     <a id="nav-matches" onclick="showPage('matches')">MATCHES</a>
@@ -151,57 +46,56 @@
 
   <div class="container">
     
-    <!-- 1. HOME SECTION -->
+    <!-- HOME SECTION -->
     <section id="home" class="page-section active-section">
-      <h2>Welcome to the Tournament</h2>
-      <p>Stay updated with all the latest fixture announcements, team schedules, and live score updates for our ongoing league operations.</p>
+      <h2>Welcome to KCCI Official Portal</h2>
+      <p>Kabrestan Cricket Control Institute (KCCI) is committed to organizing premier gully and local cricket events, tracking official fixtures, player statistics, and match records.</p>
       
-      <h3>Tournament Overview</h3>
-      <p>Our organization is dedicated to structuring competitive amateur and club-level cricket tournaments. Follow match updates, team stats, and player performances across all fixture rounds.</p>
+      <h3>Institute Overview & History</h3>
+      <p>KCCI manages team logistics, official match schedules, and local tournament rosters. Stay updated with all live announcements and season stats directly through this unified platform.</p>
       
       <div class="card-grid">
         <div class="card">
-          <h4>Upcoming Fixtures</h4>
-          <p>Check out the full list of scheduled matches, venues, and timings for the upcoming match-days.</p>
+          <h4>League Fixtures</h4>
+          <p>Get complete schedules, ground announcements, and team pairings for ongoing and upcoming KCCI tournaments.</p>
         </div>
         <div class="card">
-          <h4>Live Scorecards</h4>
-          <p>View detailed ball-by-ball breakdown, batting figures, and bowling statistics after every inning.</p>
+          <h4>Match Scorecards</h4>
+          <p>Detailed inning updates, batting performance charts, and bowling figures for all completed fixtures.</p>
         </div>
         <div class="card">
-          <h4>Management & Rules</h4>
-          <p>Read about team regulations, squad designations, and official league guidelines.</p>
+          <h4>Management & Directives</h4>
+          <p>Official institute guidelines, team registration forms, squad lists, and administrative notices.</p>
         </div>
       </div>
     </section>
 
-    <!-- 2. MATCHES SECTION -->
+    <!-- MATCHES SECTION -->
     <section id="matches" class="page-section">
-      <h2>Match Schedules & Fixtures</h2>
-      <p>Below are the upcoming and recently concluded fixture schedules:</p>
+      <h2>KCCI Match Schedules & Results</h2>
+      <p>Official schedule of matches, venues, and team lineups:</p>
       
       <div class="card-grid">
         <div class="card">
-          <h4>Match 1: Team A vs Team B</h4>
-          <p><strong>Date:</strong> Upcoming</p>
-          <p><strong>Venue:</strong> Main Ground</p>
-          <p><strong>Status:</strong> Scheduled</p>
+          <h4>KPL Season-1 Fixtures</h4>
+          <p><strong>Status:</strong> Upcoming</p>
+          <p><strong>Location:</strong> Main Ground</p>
+          <p><strong>Teams:</strong> Scheduled Squads</p>
         </div>
         <div class="card">
-          <h4>Match 2: Team C vs Team D</h4>
-          <p><strong>Date:</strong> Upcoming</p>
-          <p><strong>Venue:</strong> Main Ground</p>
-          <p><strong>Status:</strong> Scheduled</p>
+          <h4>Practice Matches</h4>
+          <p><strong>Status:</strong> Active / Completed</p>
+          <p><strong>Details:</strong> Local Club Encounters</p>
         </div>
       </div>
     </section>
 
-    <!-- 3. SCORECARD SECTION -->
+    <!-- SCORECARD SECTION -->
     <section id="scorecard" class="page-section">
-      <h2>Match Scorecard</h2>
-      <p>Detailed performance summary for recent matches:</p>
+      <h2>Official Match Scorecard</h2>
+      <p>Live stats and complete innings summary:</p>
       
-      <h3>Innings Summary</h3>
+      <h3>Batting Stats</h3>
       <table>
         <thead>
           <tr>
@@ -215,25 +109,17 @@
         </thead>
         <tbody>
           <tr>
-            <td>Batter 1</td>
-            <td>45</td>
-            <td>30</td>
-            <td>5</td>
-            <td>2</td>
-            <td>150.0</td>
-          </tr>
-          <tr>
-            <td>Batter 2</td>
-            <td>28</td>
-            <td>22</td>
-            <td>3</td>
-            <td>1</td>
-            <td>127.2</td>
+            <td>Player 1</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0.00</td>
           </tr>
         </tbody>
       </table>
 
-      <h3>Bowling Figures</h3>
+      <h3>Bowling Stats</h3>
       <table>
         <thead>
           <tr>
@@ -248,19 +134,11 @@
         <tbody>
           <tr>
             <td>Bowler 1</td>
-            <td>4.0</td>
+            <td>0.0</td>
             <td>0</td>
-            <td>24</td>
-            <td>2</td>
-            <td>6.00</td>
-          </tr>
-          <tr>
-            <td>Bowler 2</td>
-            <td>4.0</td>
             <td>0</td>
-            <td>31</td>
-            <td>1</td>
-            <td>7.75</td>
+            <td>0</td>
+            <td>0.00</td>
           </tr>
         </tbody>
       </table>
@@ -268,31 +146,20 @@
 
   </div>
 
-  <!-- Main Footer -->
   <footer>
-    <p>&copy; Tournament Management System. All Rights Reserved.</p>
-    <p>Official Updates & League Management Portal</p>
+    <p>&copy; Kabrestan Cricket Control Institute (KCCI). All Rights Reserved.</p>
+    <p>Official Gully & Club Cricket Management Portal</p>
   </footer>
 
-  <!-- Single Page Navigation Script -->
   <script>
     function showPage(pageId) {
-      // Hide all page sections
       const sections = document.querySelectorAll('.page-section');
-      sections.forEach(section => {
-        section.classList.remove('active-section');
-      });
+      sections.forEach(section => section.classList.remove('active-section'));
 
-      // Deactivate all navigation links
       const navLinks = document.querySelectorAll('nav a');
-      navLinks.forEach(link => {
-        link.classList.remove('active');
-      });
+      navLinks.forEach(link => link.classList.remove('active'));
 
-      // Show selected section
       document.getElementById(pageId).classList.add('active-section');
-
-      // Highlight selected nav link
       document.getElementById('nav-' + pageId).classList.add('active');
     }
   </script>
