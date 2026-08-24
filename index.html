@@ -1,306 +1,301 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>KCCI | Kabrestan Cricket Control Institute</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cricket League Management</title>
+  <style>
+    /* Global Styles */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f4f7f6;
+      color: #333;
+      line-height: 1.6;
+    }
+    header {
+      background-color: #1b365d;
+      color: #ffffff;
+      padding: 1.5rem 1rem;
+      text-align: center;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+    header h1 {
+      margin-bottom: 0.5rem;
+      font-size: 2rem;
+    }
+    
+    /* Navigation Bar */
+    nav {
+      background-color: #0b1d3a;
+      display: flex;
+      justify-content: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    nav a {
+      color: #ffffff;
+      padding: 1rem 1.5rem;
+      text-decoration: none;
+      font-weight: bold;
+      transition: background 0.3s;
+      cursor: pointer;
+    }
+    nav a:hover, nav a.active {
+      background-color: #0056b3;
+    }
 
-<style>
-/* =========================
-   GLOBAL STYLES
-========================= */
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:Arial, Helvetica, sans-serif;
-}
-html{ scroll-behavior:smooth; }
-body{
-    background:#071426;
-    color:#ffffff;
-    overflow-x:hidden;
-}
-:root{
-    --dark:#071426;
-    --navy:#041126;
-    --pink:#ff3b91;
-    --pink2:#ff69ad;
-    --white:#ffffff;
-    --text:#26354a;
-    --border:#dfe4eb;
-}
+    /* Container & Section View Control */
+    .container {
+      max-width: 1100px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+    }
+    .page-section {
+      display: none;
+      background: #ffffff;
+      padding: 2rem;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+    .page-section.active-section {
+      display: block;
+    }
 
-/* Page Switching Control */
-.page-section {
-    display: none; /* Hide all pages by default */
-}
-.page-section.active {
-    display: block; /* Show only active page */
-}
+    /* Typography & Utility */
+    h2 {
+      color: #1b365d;
+      margin-bottom: 1rem;
+      border-bottom: 2px solid #0056b3;
+      padding-bottom: 0.5rem;
+    }
+    h3 {
+      color: #0056b3;
+      margin: 1.5rem 0 0.5rem 0;
+    }
+    p {
+      margin-bottom: 1rem;
+    }
 
-/* =========================
-   HEADER & NAV
-========================= */
-header{
-    position:fixed;
-    top:0; left:0; width:100%; height:76px;
-    display:flex; justify-content:space-between; align-items:center;
-    padding:0 7%;
-    background:rgba(7,20,38,.97);
-    backdrop-filter:blur(14px);
-    border-bottom:1px solid rgba(255,59,145,.35);
-    z-index:1000;
-}
-.logo{ font-size:30px; font-weight:900; color:#fff; letter-spacing:3px; }
-.logo span{ color:var(--pink); }
-nav{ display:flex; align-items:center; gap:20px; }
-nav a{
-    color:white; text-decoration:none; font-size:12px; font-weight:bold;
-    transition:.3s; cursor:pointer;
-}
-nav a:hover, nav a.active-link{ color:var(--pink); }
+    /* Cards Layout */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+    }
+    .card {
+      border: 1px solid #e0e0e0;
+      border-radius: 6px;
+      padding: 1.2rem;
+      background-color: #fafafa;
+    }
+    .card h4 {
+      color: #1b365d;
+      margin-bottom: 0.5rem;
+    }
 
-/* Buttons & Common Utility */
-.btn{
-    display:inline-block; padding:14px 30px; background:var(--pink);
-    color:white; text-decoration:none; border-radius:30px; font-weight:bold;
-    border:2px solid var(--pink); transition:.3s; cursor:pointer;
-}
-.btn:hover{ background:transparent; color:var(--pink); }
+    /* Scorecard Tables */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1rem 0;
+    }
+    table, th, td {
+      border: 1px solid #dddddd;
+    }
+    th, td {
+      padding: 0.75rem;
+      text-align: left;
+    }
+    th {
+      background-color: #1b365d;
+      color: white;
+    }
+    tr:nth-child(even) {
+      background-color: #f9f9f9;
+    }
 
-/* =========================
-   HOME PAGE STYLES
-========================= */
-.hero-home{
-    min-height:100vh; position:relative; display:flex; align-items:center;
-    padding:110px 8% 70px; overflow:hidden;
-    background: linear-gradient(90deg, rgba(3,13,28,.94) 0%, rgba(7,20,38,.78) 45%, rgba(7,20,38,.45) 100%),
-    url("https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?auto=format&fit=crop&w=2400&q=90") center/cover;
-}
-.hero-content{ position:relative; z-index:2; max-width:900px; }
-.hero-tag{ display:inline-block; padding:9px 18px; border:1px solid rgba(255,59,145,.6); border-radius:30px; color:var(--pink2); font-size:12px; font-weight:bold; letter-spacing:3px; margin-bottom:25px; }
-.hero-home h1{ font-size:60px; line-height:1.05; letter-spacing:2px; }
-.hero-home h1 span{ color:var(--pink); }
-.hero-line{ width:100px; height:4px; background:var(--pink); margin:25px 0; border-radius:10px; }
-.hero-home p{ max-width:700px; color:#dfe5ec; font-size:18px; line-height:1.8; margin-bottom:30px; }
-
-/* Stats Bar */
-.stats{ display:grid; grid-template-columns:repeat(4,1fr); text-align:center; background:#071426; border-y:1px solid rgba(255,59,145,.2); }
-.stat{ padding:28px 15px; border-right:1px solid rgba(255,255,255,.08); }
-.stat h3{ font-size:32px; color:var(--pink); }
-.stat p{ margin-top:7px; color:#aeb9c8; font-size:12px; text-transform:uppercase; }
-
-/* Content Section */
-.content-section{ padding:80px 8%; background:#fff; color:var(--text); }
-.content-section.dark{ background:#071426; color:#fff; }
-.section-title{ text-align:center; font-size:38px; margin-bottom:18px; }
-.format-grid{ max-width:1100px; margin:40px auto 0; display:grid; grid-template-columns:repeat(3,1fr); gap:25px; }
-.format-card{ padding:35px 25px; border-radius:20px; background:#fff; border:1px solid #e4e7ec; box-shadow:0 12px 35px rgba(7,20,38,.08); }
-.format-card h3{ color:#071426; font-size:22px; margin-bottom:10px; }
-.format-card p{ color:#667386; line-height:1.7; font-size:14px; }
-
-/* =========================
-   MATCHES PAGE STYLES
-========================= */
-.match-panel{ background:#fff; color:#071426; border-radius:8px; overflow:hidden; margin-top:30px; }
-.teams{ padding:50px 45px; display:grid; grid-template-columns:1fr 170px 1fr; align-items:center; text-align:center; }
-.team-symbol{ width:100px; height:100px; margin:auto; display:flex; align-items:center; justify-content:center; border-radius:50%; background:#071426; color:#fff; font-size:24px; font-weight:900; }
-.team-symbol.ban{ background:#087c43; }
-.vs{ width:70px; height:70px; margin:auto; display:flex; align-items:center; justify-content:center; background:var(--pink); color:white; border-radius:50%; font-size:18px; font-weight:900; }
-.scorecard-area{ padding:25px; text-align:center; background:#fafbfc; }
-
-/* =========================
-   SCORECARD PAGE STYLES
-========================= */
-.result-banner{ background:linear-gradient(135deg,#f32983,#9d1451); padding:20px; text-align:center; border-radius:8px; margin-bottom:30px; }
-.table-box{ width:100%; overflow-x:auto; background:white; margin-bottom:30px; }
-table{ width:100%; border-collapse:collapse; color:#041126; }
-th{ padding:15px; text-align:left; font-size:11px; background:#041126; color:white; }
-td{ padding:14px 15px; border-bottom:1px solid var(--border); font-size:13px; }
-.total-row{ background:#041126; color:white; font-weight:900; }
-
-/* Mobile Adjustments */
-@media(max-width:800px){
-    nav{ gap:10px; }
-    nav a{ font-size:10px; }
-    .hero-home h1{ font-size:38px; }
-    .teams{ grid-template-columns:1fr; gap:20px; }
-    .stats{ grid-template-columns:repeat(2,1fr); }
-    .format-grid{ grid-template-columns:1fr; }
-}
-</style>
+    /* Footer */
+    footer {
+      background-color: #1b365d;
+      color: #ffffff;
+      text-align: center;
+      padding: 1.5rem;
+      margin-top: 3rem;
+    }
+    footer p {
+      margin: 0.3rem 0;
+    }
+  </style>
 </head>
 <body>
 
-<!-- HEADER NAVBAR -->
-<header>
-    <div class="logo">K<span>C</span>CI</div>
-    <nav>
-        <a onclick="showPage('home')" id="link-home" class="active-link">HOME</a>
-        <a onclick="showPage('matches')" id="link-matches">MATCHES</a>
-        <a onclick="showPage('scorecard')" id="link-scorecard">SCORECARD</a>
-    </nav>
-</header>
+  <!-- Main Header -->
+  <header>
+    <h1>Tournament Portal</h1>
+    <p>Official League Matches & Scorecard Updates</p>
+  </header>
 
-<!-- =========================
-     1. HOME PAGE
-========================= -->
-<div id="home" class="page-section active">
-    <section class="hero-home">
-        <div class="hero-content">
-            <div class="hero-tag">OFFICIAL KCCI • CRICKET INSTITUTION</div>
-            <h1>KABRESTAN<br>CRICKET <span>CONTROL</span><br>INSTITUTE</h1>
-            <div class="hero-line"></div>
-            <p>Experience the journey of KCCI — from a local cricket beginning to a structured grassroots cricket platform.</p>
-            <button onclick="showPage('matches')" class="btn">MATCH CENTER</button>
-        </div>
-    </section>
+  <!-- Navigation Menu -->
+  <nav>
+    <a id="nav-home" class="active" onclick="showPage('home')">HOME</a>
+    <a id="nav-matches" onclick="showPage('matches')">MATCHES</a>
+    <a id="nav-scorecard" onclick="showPage('scorecard')">SCORECARD</a>
+  </nav>
 
-    <div class="stats">
-        <div class="stat"><h3>2019</h3><p>Journey Began</p></div>
-        <div class="stat"><h3>2026</h3><p>Official Establishment</p></div>
-        <div class="stat"><h3>40+</h3><p>Associated Players</p></div>
-        <div class="stat"><h3>3</h3><p>Major Formats</p></div>
-    </div>
-
-    <section class="content-section dark">
-        <h2 class="section-title">THREE MAJOR FORMATS</h2>
-        <div class="format-grid">
-            <div class="format-card"><h3>TEST CRICKET</h3><p>Long-format cricket designed to test patience and endurance.</p></div>
-            <div class="format-card"><h3>ONE DAY CRICKET</h3><p>Regular Sunday ODI matches provide players with a competitive platform.</p></div>
-            <div class="format-card"><h3>T20 CRICKET</h3><p>Fast-paced format focused on aggressive scoring and match awareness.</p></div>
-        </div>
-    </section>
-</div>
-
-<!-- =========================
-     2. MATCHES PAGE
-========================= -->
-<div id="matches" class="page-section" style="padding-top:100px;">
-    <div style="width:90%; max-width:1100px; margin:auto;">
-        <h2 class="section-title" style="text-align:left;">OFFICIAL MATCH CENTRE</h2>
-        <div class="match-panel">
-            <div class="teams">
-                <div><div class="team-symbol">IND</div><h3>INDIA</h3><p>238/2</p></div>
-                <div><div class="vs">VS</div><p style="margin-top:10px;">MATCH RESULT</p></div>
-                <div><div class="team-symbol ban">BAN</div><h3>BANGLADESH</h3><p>237 ALL OUT</p></div>
-            </div>
-            <div class="scorecard-area">
-                <button onclick="showPage('scorecard')" class="btn">VIEW FULL SCORECARD</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- =========================
-     3. SCORECARD PAGE
-========================= -->
-<div id="scorecard" class="page-section" style="padding-top:100px;">
-    <div style="width:90%; max-width:1100px; margin:auto;">
-        <div class="result-banner">
-            <small>MATCH RESULT</small>
-            <h2>INDIA WON BY 8 WICKETS</h2>
-            <p>Bangladesh 237 All Out • India 238/2</p>
-        </div>
-
-        <!-- BANGLADESH BATTING -->
-        <h3 style="margin-bottom:10px; color:var(--pink);">BANGLADESH BATTING</h3>
-        <div class="table-box">
-            <table>
-                <thead>
-                    <tr><th>BATSMAN</th><th>RUNS</th><th>BALLS</th><th>SR</th></tr>
-                </thead>
-                <tbody>
-                    <tr><td>MOIN.S</td><td>108</td><td>48</td><td>225.00</td></tr>
-                    <tr><td>RAHIL</td><td>7</td><td>6</td><td>116.67</td></tr>
-                    <tr><td>GULAM</td><td>90</td><td>64</td><td>140.63</td></tr>
-                    <tr class="total-row"><td colspan="3">BANGLADESH TOTAL</td><td>237 ALL OUT</td></tr>
-                </tbody>
-            </table>
-        </div>
-
-        <!-- INDIA BOWLING -->
-        <h3 style="margin-bottom:10px; color:var(--pink);">INDIA BOWLING</h3>
-        <div class="table-box">
-            <table>
-                <thead>
-                    <tr><th>BOWLER</th><th>OVERS</th><th>RUNS</th><th>WICKETS</th><th>ECON</th></tr>
-                </thead>
-                <tbody>
-                    <tr><td>M.SOHEL</td><td>4.0</td><td>28</td><td>4</td><td>7.00</td></tr>
-                    <tr><td>AZHAR BANGI</td><td>4.0</td><td>35</td><td>2</td><td>8.75</td></tr>
-                    <tr><td>ARHAN MURAD</td><td>3.5</td><td>42</td><td>3</td><td>10.95</td></tr>
-                </tbody>
-            </table>
-        </div>
-
-        <hr style="border:0; border-top:1px solid rgba(255,255,255,0.1); margin:40px 0;">
-
-        <!-- INDIA BATTING -->
-        <h3 style="margin-bottom:10px; color:var(--pink);">INDIA BATTING</h3>
-        <div class="table-box">
-            <table>
-                <thead>
-                    <tr><th>BATSMAN</th><th>RUNS</th><th>BALLS</th><th>SR</th></tr>
-                </thead>
-                <tbody>
-                    <tr><td>ARHAN MURAD</td><td>4</td><td>9</td><td>44.44</td></tr>
-                    <tr><td>AZHAR BANGI</td><td>67</td><td>40</td><td>167.50</td></tr>
-                    <tr><td>M.SOHEL</td><td>126</td><td>38</td><td>331.58</td></tr>
-                    <tr class="total-row"><td colspan="3">INDIA TOTAL</td><td>238/2</td></tr>
-                </tbody>
-            </table>
-        </div>
-
-        <!-- BANGLADESH BOWLING -->
-        <h3 style="margin-bottom:10px; color:var(--pink);">BANGLADESH BOWLING</h3>
-        <div class="table-box">
-            <table>
-                <thead>
-                    <tr><th>BOWLER</th><th>OVERS</th><th>RUNS</th><th>WICKETS</th><th>ECON</th></tr>
-                </thead>
-                <tbody>
-                    <tr><td>MOIN.S</td><td>3.0</td><td>55</td><td>1</td><td>18.33</td></tr>
-                    <tr><td>GULAM</td><td>2.2</td><td>48</td><td>1</td><td>20.57</td></tr>
-                    <tr><td>RAHIL</td><td>2.0</td><td>38</td><td>0</td><td>19.00</td></tr>
-                </tbody>
-            </table>
-        </div>
-        
-        <div style="text-align:center; margin:30px 0;">
-            <button onclick="showPage('matches')" class="btn">← BACK TO MATCH CENTRE</button>
-        </div>
-    </div>
-</div>
-
-<!-- FOOTER -->
-<footer style="margin-top:80px; padding:30px; text-align:center; background:#020912; border-top:2px solid var(--pink);">
-    <h3>KCCI - Kabrestan Cricket Control Institute</h3>
-    <p>© 2026 KCCI. All Rights Reserved.</p>
-</footer>
-
-<!-- SCRIPT TO SWITCH PAGES SMOOTHLY -->
-<script>
-function showPage(pageId) {
-    // Hide all section pages
-    let pages = document.querySelectorAll('.page-section');
-    pages.forEach(page => page.classList.remove('active'));
-
-    // Show selected page
-    document.getElementById(pageId).classList.add('active');
-
-    // Update Nav Active links
-    let navLinks = document.querySelectorAll('nav a');
-    navLinks.forEach(link => link.classList.remove('active-link'));
+  <div class="container">
     
-    let activeNav = document.getElementById('link-' + pageId);
-    if(activeNav) activeNav.classList.add('active-link');
+    <!-- 1. HOME SECTION -->
+    <section id="home" class="page-section active-section">
+      <h2>Welcome to the Tournament</h2>
+      <p>Stay updated with all the latest fixture announcements, team schedules, and live score updates for our ongoing league operations.</p>
+      
+      <h3>Tournament Overview</h3>
+      <p>Our organization is dedicated to structuring competitive amateur and club-level cricket tournaments. Follow match updates, team stats, and player performances across all fixture rounds.</p>
+      
+      <div class="card-grid">
+        <div class="card">
+          <h4>Upcoming Fixtures</h4>
+          <p>Check out the full list of scheduled matches, venues, and timings for the upcoming match-days.</p>
+        </div>
+        <div class="card">
+          <h4>Live Scorecards</h4>
+          <p>View detailed ball-by-ball breakdown, batting figures, and bowling statistics after every inning.</p>
+        </div>
+        <div class="card">
+          <h4>Management & Rules</h4>
+          <p>Read about team regulations, squad designations, and official league guidelines.</p>
+        </div>
+      </div>
+    </section>
 
-    // Scroll to top automatically
-    window.scrollTo({top: 0, behavior: 'smooth'});
-}
-</script>
+    <!-- 2. MATCHES SECTION -->
+    <section id="matches" class="page-section">
+      <h2>Match Schedules & Fixtures</h2>
+      <p>Below are the upcoming and recently concluded fixture schedules:</p>
+      
+      <div class="card-grid">
+        <div class="card">
+          <h4>Match 1: Team A vs Team B</h4>
+          <p><strong>Date:</strong> Upcoming</p>
+          <p><strong>Venue:</strong> Main Ground</p>
+          <p><strong>Status:</strong> Scheduled</p>
+        </div>
+        <div class="card">
+          <h4>Match 2: Team C vs Team D</h4>
+          <p><strong>Date:</strong> Upcoming</p>
+          <p><strong>Venue:</strong> Main Ground</p>
+          <p><strong>Status:</strong> Scheduled</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. SCORECARD SECTION -->
+    <section id="scorecard" class="page-section">
+      <h2>Match Scorecard</h2>
+      <p>Detailed performance summary for recent matches:</p>
+      
+      <h3>Innings Summary</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Player Name</th>
+            <th>Runs</th>
+            <th>Balls</th>
+            <th>4s</th>
+            <th>6s</th>
+            <th>SR</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Batter 1</td>
+            <td>45</td>
+            <td>30</td>
+            <td>5</td>
+            <td>2</td>
+            <td>150.0</td>
+          </tr>
+          <tr>
+            <td>Batter 2</td>
+            <td>28</td>
+            <td>22</td>
+            <td>3</td>
+            <td>1</td>
+            <td>127.2</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>Bowling Figures</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Bowler Name</th>
+            <th>Overs</th>
+            <th>Maidens</th>
+            <th>Runs</th>
+            <th>Wickets</th>
+            <th>Econ</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Bowler 1</td>
+            <td>4.0</td>
+            <td>0</td>
+            <td>24</td>
+            <td>2</td>
+            <td>6.00</td>
+          </tr>
+          <tr>
+            <td>Bowler 2</td>
+            <td>4.0</td>
+            <td>0</td>
+            <td>31</td>
+            <td>1</td>
+            <td>7.75</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+  </div>
+
+  <!-- Main Footer -->
+  <footer>
+    <p>&copy; Tournament Management System. All Rights Reserved.</p>
+    <p>Official Updates & League Management Portal</p>
+  </footer>
+
+  <!-- Single Page Navigation Script -->
+  <script>
+    function showPage(pageId) {
+      // Hide all page sections
+      const sections = document.querySelectorAll('.page-section');
+      sections.forEach(section => {
+        section.classList.remove('active-section');
+      });
+
+      // Deactivate all navigation links
+      const navLinks = document.querySelectorAll('nav a');
+      navLinks.forEach(link => {
+        link.classList.remove('active');
+      });
+
+      // Show selected section
+      document.getElementById(pageId).classList.add('active-section');
+
+      // Highlight selected nav link
+      document.getElementById('nav-' + pageId).classList.add('active');
+    }
+  </script>
 
 </body>
 </html>
